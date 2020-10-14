@@ -24,9 +24,11 @@ public class FcmGroupApiController {
 
     static class CreateFcmGroupResponse {
         private Long id;
+        private String groupName;
 
-        public CreateFcmGroupResponse(Long id) {
+        public CreateFcmGroupResponse(Long id, String groupName) {
             this.id = id;
+            this.groupName = groupName;
         }
     }
 

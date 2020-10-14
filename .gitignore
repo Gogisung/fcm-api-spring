@@ -5,6 +5,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### QuaryDSL ###
+!**/src/main/**/generated/
+
 ### STS ###
 .apt_generated
 .classpath

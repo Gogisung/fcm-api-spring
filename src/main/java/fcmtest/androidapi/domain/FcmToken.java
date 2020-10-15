@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,4 +21,13 @@ public class FcmToken {
     @JoinColumn(name = "group_id")
     private FcmGroup fcmGroup;
 
+    @NotEmpty
+    private List<String> registration_id;
+
+    //생성 메서드
+    public static FcmToken createFcmToken(List<String> registrationId) {
+        FcmToken fcmToken = new FcmToken();
+        fcmToken.setRegistration_id(registrationId);
+        return fcmToken;
+    }
 }

@@ -17,12 +17,11 @@ public class FcmGroupMessage {
     @Column(name = "message_id")
     private Long id;
 
-    private String groupToken;
+    private String groupName;
     private String messageTitle;
     private String messageBody;
-    private String message;
     private LocalDateTime sendDate;
 
-    @ManyToMany(mappedBy = "fcmGroupMessages")
-    private List<FcmGroup> fcmGroups = new ArrayList<>();
+//    @ManyToMany(mappedBy = "fcmGroupMessages")
+//    private List<FcmGroup> fcmGroups = new ArrayList<>();
 }

@@ -3,12 +3,14 @@ package fcmtest.androidapi.repository;
 import fcmtest.androidapi.domain.FcmGroup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional
 public class FcmGroupRepository {
 
     private final EntityManager em;

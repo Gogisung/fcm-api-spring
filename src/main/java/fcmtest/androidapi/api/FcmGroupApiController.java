@@ -22,21 +22,52 @@ public class FcmGroupApiController {
     public CreateFcmGroupResponse saveFcmGroupV1(@RequestBody @Valid CreateFcmGroupRequest request) {
         FcmGroup fcmGroup1 = new FcmGroup();
         fcmGroup1.setGroupName(request.getGroupName());
+        fcmGroup1.setFcmTokens(request.getFcmTokens());
         fcmGroup1.setCreateDate(LocalDateTime.now());
-//        fcmGroup1.setFcmTokens(request.getFcmTokens());
 
         //fcm 토큰 생성
-        FcmGroup.createFcmToken();
-
-        Long id = fcmGroupService.join(fcmGroup1);
+//        FcmGroup.createFcmToken(request.getGroupName(), request.getFcmTokens());
+//
+//        fcmNotification(
+//                "create",
+//                "gogosing123",
+//                "dN3_gcmdQSOk8VjX1pxDRO:APA91bGhVA0IQk9hHueJx17J5SSvFKJ7jheOpTTpTWryGOAjuDz1PoRQR5s4Yb4_WmYRx7dO-ksvzSMNFuhq0HBRZIFkx7SbZMdsUkW70Mcof-QHepgEHvAwgIkHUhSPvU5X79cOlgbZ");
+//        Long id = fcmGroupService.join(fcmGroup1);
 //        fcmNotification("create", "gogoTest", request.getFcmTokens());
+        Long id = fcmGroupService.join(fcmGroup1);
+
         return new CreateFcmGroupResponse(id);
+    }
+
+
+
+
+
+    @Data
+    static class CreateFcmGroupRequest {
+        private String groupName;
+        private LocalDateTime createDate;
+        private String fcmTokens;
+    }
+
+    @Data
+    static class CreateFcmGroupResponse {
+        private Long id;
+
+        public CreateFcmGroupResponse(Long id) {
+            this.id = id;
+        }
     }
 
     @RequestMapping("https://fcm.googleapis.com/fcm/notification")
     @ResponseBody
-    public CreateFcmNotificationResponse fcmNotification(@RequestBody @Valid String operation, String notificationKeyName, List<FcmToken> registrationIds) {
-        return new CreateFcmNotificationResponse();
+    public void fcmNotification(@RequestBody @Valid String operation, String notificationKeyName, String registrationIds) {
+        System.out.println("operation = " + operation);
+        System.out.println("notificationKeyName = " + notificationKeyName);
+        System.out.println("registrationIds = " + registrationIds);
+//        CreateFcmNotificationResponse response = new CreateFcmNotificationResponse();
+
+//        return ;
     }
 
 //    @Data
@@ -50,31 +81,12 @@ public class FcmGroupApiController {
     static class CreateFcmNotificationResponse {
         private String notificationKey;
 
-//        public CreateFcmNotificationResponse(String notificationKey) {
-//            this.notificationKey = notificationKey;
-//        }
-
-        public CreateFcmNotificationResponse() {
-
+        public CreateFcmNotificationResponse(String notificationKey) {
+            this.notificationKey = notificationKey;
         }
     }
 
 
-    @Data
-    static class CreateFcmGroupRequest {
-        private String groupName;
-        private LocalDateTime createDate;
-        private List<FcmToken> fcmTokens;
-    }
-
-    @Data
-    static class CreateFcmGroupResponse {
-        private Long id;
-
-        public CreateFcmGroupResponse(Long id) {
-            this.id = id;
-        }
-    }
 
 
 }

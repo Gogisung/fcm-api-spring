@@ -22,12 +22,12 @@ public class FcmToken {
     private FcmGroup fcmGroup;
 
     @NotEmpty
-    private List<String> registration_id;
+    private String registration_id;
 
     //생성 메서드
-    public static FcmToken createFcmToken(List<String> registrationId) {
-        FcmToken fcmToken = new FcmToken();
-        fcmToken.setRegistration_id(registrationId);
-        return fcmToken;
-    }
+//    public static FcmToken createFcmToken(List<String> registrationId) {
+//        FcmToken fcmToken = new FcmToken();
+//        fcmToken.setRegistration_id(registrationId);
+//        return fcmToken;
+//    }
 }

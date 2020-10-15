@@ -22,27 +22,30 @@ public class FcmGroup {
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "fcmGroup")
-    private List<FcmToken> fcmTokens = new ArrayList<>();
+//    @OneToMany(mappedBy = "fcmGroup")
+//    private List<FcmToken> fcmTokens = new ArrayList<>();
+    private String fcmTokens;
 
     @ManyToMany
     @JoinTable(name = "message_group",
             joinColumns = @JoinColumn(name = "message_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id"))
-    private List<FcmGroupMessage> fcmGroupMessages = new ArrayList<>();
+    private List<FcmMessage> fcmMessages = new ArrayList<>();
 
     //연관관계 메서드
-    public void addFcmToken(FcmToken fcmToken) {
-        fcmTokens.add(fcmToken);
-        fcmToken.setFcmGroup(this);
-    }
+//    public void addFcmToken(FcmToken fcmToken) {
+//        fcmTokens.add(fcmToken);
+//        fcmToken.setFcmGroup(this);
+//    }
 
     //생성 메서드
-    public static FcmGroup createFcmToken(FcmToken... fcmTokens) {
-        FcmGroup fcmGroup = new FcmGroup();
-        for (FcmToken fcmToken : fcmTokens) {
-            fcmGroup.addFcmToken(fcmToken);
-        }
-        return fcmGroup;
-    }
+//    public static FcmGroup createFcmToken(String groupName, FcmToken... fcmTokens) {
+//        FcmGroup fcmGroup = new FcmGroup();
+//        fcmGroup.setGroupName(groupName);
+//        for (FcmToken fcmToken : fcmTokens) {
+//            fcmGroup.addFcmToken(fcmToken);
+//        }
+//        fcmGroup.setCreateDate(LocalDateTime.now());
+//        return fcmGroup;
+//    }
 }

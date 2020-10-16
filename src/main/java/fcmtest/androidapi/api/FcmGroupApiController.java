@@ -3,6 +3,7 @@ package fcmtest.androidapi.api;
 import fcmtest.androidapi.domain.FcmGroup;
 import fcmtest.androidapi.domain.FcmToken;
 import fcmtest.androidapi.service.FcmGroupService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +11,41 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 public class FcmGroupApiController {
 
     private final FcmGroupService fcmGroupService;
+
+    public  List<FcmGroup> allFcmGroups() {
+        return fcmGroupService.findFcmGroup();
+    }
+
+    @GetMapping("/api/fcmGroup")
+    public Result fcmGroupsV2() {
+        List<FcmGroup> findFcmGroup = fcmGroupService.findFcmGroup();
+        List<fcmGroupDto> collet = findFcmGroup.stream()
+                .map(m -> new fcmGroupDto(m.getGroupName(), m.getFcmTokens()))
+                .collect(Collectors.toList());
+        return new Result(collet.size(), collet);
+    }
+
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private int count;
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class fcmGroupDto {
+        private String groupName;
+        private String fcmTokens;
+    }
 
 
     @PostMapping("/api/fcmGroup")

@@ -1,5 +1,6 @@
 package fcmtest.androidapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,17 +21,18 @@ public class FcmGroup {
     @NotEmpty
     private String groupName;
 
+    @JsonIgnore
     private LocalDateTime createDate;
 
 //    @OneToMany(mappedBy = "fcmGroup")
 //    private List<FcmToken> fcmTokens = new ArrayList<>();
     private String fcmTokens;
 
-    @ManyToMany
-    @JoinTable(name = "message_group",
-            joinColumns = @JoinColumn(name = "message_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
-    private List<FcmMessage> fcmMessages = new ArrayList<>();
+//    @ManyToMany
+//    @JoinTable(name = "message_group",
+//            joinColumns = @JoinColumn(name = "message_id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id"))
+//    private List<FcmMessage> fcmMessages = new ArrayList<>();
 
     //연관관계 메서드
 //    public void addFcmToken(FcmToken fcmToken) {

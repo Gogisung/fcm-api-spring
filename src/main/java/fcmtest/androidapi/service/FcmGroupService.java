@@ -1,6 +1,7 @@
 package fcmtest.androidapi.service;
 
 import fcmtest.androidapi.domain.FcmGroup;
+import fcmtest.androidapi.domain.FcmGroupMessage;
 import fcmtest.androidapi.repository.FcmGroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class FcmGroupService {
      * FCM 조회
      */
     public List<FcmGroup> findFcmGroup() {
+
         return fcmGroupRepository.findAll();
     }
 
